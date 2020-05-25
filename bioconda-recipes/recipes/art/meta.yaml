@@ -1,0 +1,37 @@
+{% set name = "art" %}
+{% set version = "2016.06.05" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  number: 2
+  skip: False
+
+source:
+  url: https://www.niehs.nih.gov/research/resources/assets/docs/artsrcmountrainier20160605linuxtgz.tgz
+  md5: 6df7ce4760f9ad309846c296ad90806d
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+  host:
+    - gsl
+    - openblas
+    - blas
+  run:
+    - gsl
+    - openblas
+    - blas
+
+test:
+  commands:
+    - art_illumina -h  | grep 'Version'
+    - art_454  | grep 'Version'
+    - art_SOLiD  | grep 'Version'
+
+about:
+  home: http://www.niehs.nih.gov/research/resources/software/biostatistics/art/
+  license: GPLv2
+  summary: 'Illumina, 454 and Solid read simulator'

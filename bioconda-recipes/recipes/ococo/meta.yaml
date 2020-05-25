@@ -1,0 +1,31 @@
+{% set version = "0.1.2.7" %}
+{% set sha256 = "0a93ca3ed14cdeb1b274a30b433db128105274caed2b0b06742fc42de7ed6d75" %}
+
+package:
+  name: ococo
+  version: {{ version }}
+
+build:
+  number: 0
+
+source:
+  url: https://github.com/karel-brinda/ococo/archive/{{ version }}.tar.gz
+  sha256:  {{ sha256 }}
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+  host:
+    - zlib
+
+  run:
+    - zlib
+
+test:
+  commands:
+    - ococo -v
+
+about:
+  home: http://github.com/karel-brinda/ococo
+  license: MIT
+  summary: Ococo, the first online consensus caller.

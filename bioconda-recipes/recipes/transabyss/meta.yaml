@@ -1,0 +1,38 @@
+{% set version = "2.0.1" %}
+
+package:
+  name: transabyss
+  version: {{ version }}
+
+source:
+  url: https://github.com/bcgsc/transabyss/releases/download/{{ version }}/transabyss-{{ version }}.zip
+  sha256: 542779af2d1232ca872a57b922cfd32e1c6e9e7e0b5fae56ef2e7682dfdf6040
+  patches:
+    - transabyss.patch
+    - transabyss-merge.patch
+    - package_info.patch
+
+build:
+  noarch: python
+  number: 6
+
+requirements:
+  host:
+    - python
+  run:
+    - abyss 2.0.*
+    - python-igraph 0.7.*
+    - samtools
+    - blat
+    - python
+
+test:
+  commands:
+    - transabyss --help
+    - transabyss-merge --help
+
+about:
+  home: https://github.com/bcgsc/transabyss
+  license: GPL-3.0
+  license_file: LICENSE
+  summary: 'de novo assembly of RNA-Seq data using ABySS'

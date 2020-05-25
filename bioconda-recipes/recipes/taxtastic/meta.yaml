@@ -1,0 +1,44 @@
+{% set version = "0.8.11" %}
+{% set sha256 = "24f4389cc4c42e201d95c832b7e501ff26d4af4472bb6c92dd62d9e92b974910" %}
+
+package:
+  name: taxtastic
+  version: '{{version}}'
+
+source:
+  url: https://pypi.python.org/packages/source/t/taxtastic/taxtastic-{{version}}.tar.gz
+  sha256: '{{sha256}}'
+
+build:
+  noarch: python
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python >3
+    - setuptools
+    - sqlalchemy >=0.7
+    - decorator
+    - biopython
+    - xlrd
+
+  run:
+    - python >3
+    - sqlalchemy >=0.7
+    - decorator
+    - biopython
+    - xlrd
+
+test:
+  imports:
+    - taxtastic
+    - taxtastic.scripts
+    - taxtastic.subcommands
+
+about:
+  home: https://github.com/fhcrc/taxtastic
+  license: GPL-3.0
+  license_family: GPL
+  license_file: LICENSE
+  summary: Tools for taxonomic naming and annotation

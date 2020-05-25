@@ -1,0 +1,56 @@
+{% set name = "antiSMASH" %}
+{% set version = "5.1.2" %}
+{% set sha256 = "a500edfa344318f8cd304a9a629695e210850815b0ca4077e06bf6ad7220c4db" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  number: 0
+  noarch: python
+
+source:
+  url: https://dl.secondarymetabolites.org/releases/{{ version }}/antismash-{{ version }}.tar.gz 
+  sha256: {{ sha256 }}
+
+requirements:
+  host:
+    - python >=3
+    - pip
+  run:
+    - python >=3
+    - numpy
+    - biopython >=1.71
+    - helperlibs
+    - jinja2
+    - pysvg-py3
+    - bcbio-gff
+    - pyscss
+    - matplotlib
+    - scipy
+    - scikit-learn >=0.19
+    - diamond ==0.9.*
+    - fasttree ==2.1.*
+    - glimmerhmm ==3.0.*
+    - hmmer2
+    - hmmer ==3.1b2
+    - meme <=4.11.2
+    - muscle ==3.8.*
+    - blast ==2.2.*
+    - prodigal
+
+test:
+  commands:
+    - antismash -h
+
+about:
+  home: http://antismash.secondarymetabolites.org/
+  license: AGPL-3.0
+  license_family: AGPL
+  license_file: LICENSE.txt
+  summary: "antiSMASH allows the rapid genome-wide identification, annotation and analysis of secondary metabolite biosynthesis gene clusters."
+
+extra:
+  identifiers:
+    - biotools:antismash

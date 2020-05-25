@@ -1,0 +1,66 @@
+{% set name = "quast" %}
+{% set version = "5.0.2" %}
+{% set hash = "2b31aac010f5c04d5367f1bf718516ae" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  number: 2
+
+source:
+  url: http://downloads.sourceforge.net/project/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  md5: {{ hash }}
+  patches:
+    - genemark-issue_disable-and-exclude-from-package.patch
+    - skip-glimmer-in-test.patch
+    - remove-explicit-dependencies-from-setup-py.patch
+
+requirements:
+  build:
+    - {{ compiler('c') }}    
+  host:    
+    - perl
+    - python
+    - setuptools
+    - matplotlib
+    - joblib
+    - simplejson
+    - blast
+    - zlib
+    - glimmerHMM
+    - circos
+  run:
+    - perl
+    - python
+    - matplotlib
+    - openjdk >=8
+    - joblib
+    - simplejson
+    - blast
+    - zlib
+    - glimmerHMM
+    - circos
+
+test:
+  source_files:
+    - test_data
+  commands:
+    - quast --version
+    - metaquast --version
+
+about:
+  home: http://{{ name|lower }}.sourceforge.net/
+  license: Custom
+  license_file: LICENSE.txt
+  summary: Quality Assessment Tool for Genome Assemblies
+
+extra:
+  container:
+    # ascii fallback fails without locale
+    extended-base: true
+  notes: |
+    - GeneMark gene prediction software is disabled due to licensing issues
+  identifiers:
+    - biotools:quast

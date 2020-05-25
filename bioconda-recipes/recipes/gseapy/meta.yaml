@@ -1,0 +1,57 @@
+package:
+  name: gseapy
+  version: "0.9.18"
+
+source:
+  url: https://files.pythonhosted.org/packages/cc/24/64c0b22558f45d0e4fce026618096cd578208c54bba28ba9a29619a8f194/gseapy-0.9.18.tar.gz
+  sha256: 6c26a72ceeda9826c254f9ff19e5943f182b9a13d1c03613400ff5e800e398af
+
+build:
+  noarch: python
+  entry_points:
+    - gseapy = gseapy.__main__:main
+  number: 0
+
+requirements:
+  host:
+    - python >3
+    - setuptools
+    - numpy >=1.13.0
+    - scipy
+    - pandas >=0.16
+    - matplotlib-base >=1.4.3
+    - beautifulsoup4 >=4.4.1
+    - requests
+    - lxml
+    - html5lib
+    - bioservices
+    - joblib
+  run:
+    - python >3
+    - numpy >=1.13.0
+    - scipy
+    - pandas >=0.16
+    - matplotlib-base >=1.4.3
+    - beautifulsoup4 >=4.4.1
+    - requests
+    - lxml
+    - html5lib
+    - bioservices
+    - joblib
+
+test:
+  imports:
+    - gseapy
+  commands:
+    - gseapy --help
+
+about:
+  home: https://github.com/zqfang/gseapy
+  license: MIT License
+  summary: 'Gene Set Enrichment Analysis in Python'
+  license_family: MIT
+
+extra:
+  container:
+    # matplotlib needs opengl support
+    extended-base: true

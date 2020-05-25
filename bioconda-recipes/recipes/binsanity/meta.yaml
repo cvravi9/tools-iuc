@@ -1,0 +1,38 @@
+{% set version = "0.3.8" %}
+{% set sha256 = "039713e40f867ef0239f1db55a07b36b0957fcdd99c2c352387e852e2b7a0908" %}
+
+package:
+  name: binsanity
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/b/binsanity/Binsanity-{{ version }}.tar.gz
+  sha256: '{{ sha256 }}'
+
+build:
+  noarch: python
+  number: 0
+  script: $PYTHON -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - biopython
+    - pandas >=0.13.0
+    - scipy >=0.13.0
+    - checkm-genome
+    - scikit-learn
+    - subread
+
+test:
+  commands:
+    - Binsanity -h
+
+about:
+  home: https://github.com/edgraham/BinSanity
+  license: GPL-3.0
+  license_family: GPL
+  summary: Method to cluster contigs based a biphasic method with coverage and composition

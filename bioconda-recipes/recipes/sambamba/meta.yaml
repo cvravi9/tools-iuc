@@ -1,0 +1,38 @@
+{% set version='0.7.1' %}
+
+package:
+  name: sambamba
+  version: {{ version }}
+
+source:
+  url: https://github.com/biod/sambamba/archive/v{{ version }}.tar.gz
+  sha256: f03a415a3bc572e9ad3807936fde6eea1720e85611a8890c8bb91218c598bc38
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - ldc >=1.17.0
+    - bzip2
+    - htslib
+    - zlib
+    - xz
+    - git  # needed for BioD
+  run:
+    - {{ pin_compatible('ldc', max_pin='x.x') }}
+    - bzip2
+    - zlib
+    - xz
+
+test:
+  commands:
+    - sambamba view --help
+
+about:
+  home: https://github.com/biod/sambamba
+  license: GPLv2
+  license_file: LICENSE
+  summary: Tools for working with SAM/BAM data

@@ -1,0 +1,43 @@
+package:
+  name: snp-pipeline
+  version: "2.2.0"
+
+source:
+  url: https://files.pythonhosted.org/packages/37/09/6a386ee232eab25bc71435921975763d415a65072392768214017e778a99/snp-pipeline-2.2.0.tar.gz
+  sha256: b8a47f79aad559e8f91322093540c32862c749df2e51566c3bf0fcd8786125e0
+
+build:
+  number: 0
+  noarch: python
+  entry_points:
+    - cfsan_snp_pipeline = snppipeline.cfsan_snp_pipeline:main
+    - qarrayrun = snppipeline.qarrayrun:main
+
+requirements:
+  host:
+    - python
+    - setuptools
+  run:
+    - python
+    - pyvcf >=0.6.7
+    - setuptools
+    - psutil
+    - biopython
+    - jobrunner
+
+test:
+  imports:
+    - snppipeline
+  requires:
+    - testfixtures
+  commands:
+    - cfsan_snp_pipeline --version
+
+extra:
+  skip-lints:
+    - uses_setuptools  # uses pkg_resources
+
+about:
+  home: https://github.com/CFSAN-Biostatistics/snp-pipeline
+  license: BSD License
+  summary: 'Script and functions for SNP matrix construction'

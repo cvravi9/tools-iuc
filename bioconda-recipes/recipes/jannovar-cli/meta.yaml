@@ -1,0 +1,28 @@
+{% set version = "0.34" %}
+{% set sha256 = "c20976b24c83518a55855136ef05fdd160826de21117591e4547e3044705c135" %}
+
+package:
+  name: jannovar-cli
+  version: {{ version }}
+
+source:
+  url: https://search.maven.org/remotecontent?filepath=de/charite/compbio/jannovar-cli/{{ version }}/jannovar-cli-{{ version }}-bin.zip
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - openjdk >=8
+
+test:
+  commands:
+    - jannovar --version
+    - jannovar de.charite.compbio.jannovar.Jannovar --version
+
+about:
+  home: https://github.com/charite/jannovar
+  summary: Java tool for performing annotation of VCF files
+  license: BSD2

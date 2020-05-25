@@ -1,0 +1,30 @@
+{% set version = "0.12.1" %}
+
+package:
+  name: seqkit
+  version: {{ version }}
+
+source:
+  url: https://github.com/shenwei356/seqkit/releases/download/v{{ version }}/seqkit_darwin_amd64.tar.gz # [osx]
+  md5: 746de9e4f68efd04e8eb50a572f47330 # [osx]
+
+  url: https://github.com/shenwei356/seqkit/releases/download/v{{ version }}/seqkit_linux_amd64.tar.gz # [linux]
+  md5: f12da2507d4a6debf8b09ea9cc5db3f1 # [linux]
+
+build:
+  number: 0
+  skip: False
+
+test:
+  commands:
+    - seqkit version --help
+
+about:
+  home: https://github.com/shenwei356/seqkit
+  summary: Cross-platform and ultrafast toolkit for FASTA/Q file manipulation
+  license: MIT
+
+extra:
+  skip-lints:
+    - should_be_noarch_generic
+    - should_not_be_noarch_source
