@@ -1,0 +1,41 @@
+<tool id="simwalk2" name="simwalk2" version="0.1.0" python_template_version="3.5">
+    <requirements>
+        <requirement type="package">simwalk2</requirement>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+    mega2 -m $map -l $locus -p $pedigree -pe $penetrance $batchfile > $simwalk2output
+    ]]></command>
+    <inputs>
+	<param name="map" type="data" format="txt" label="Map Data File" help="Adding Map Data File"/>
+	<param name="locus" type="data" format="txt"  label="Locus Data File" help="Adding Locus Data File"/>
+	<param name="pedigree" type="data" format="txt"  label="Pedigree Data File" help="Adding Pedigree Data File"/>
+	<param name="penetrance" type="data" format="txt"  label="Penetrance Data File" help="Adding Penetrance Data File"/>
+	<param type="analysis" type="mode" label="Selecting the type of Analysis">
+		<option value="Sampling"> Sampling Analysis </option>
+		<option value="Haplotype"> Haplotype Analysis </option>
+		<option value="PLA"> Parametric Linkage Analysis </option>
+		<option value="NPL"> Non-Parametric Linkage Analysis </option>
+		<option value="IBD"> Identity-by-Descent Analysis</option>
+		<option value="Mistyping"> Mistyping Analysis</option>
+	    </param>
+    </inputs>
+    <outputs>
+	<data name="simwalk2output" format="txt" />
+    </outputs>
+    <tests>
+	<test>
+	    <param name="map" value="map.dat"/>
+	    <param name="locus" value="locus.dat"/>
+	    <param name="pedigree" value="pedigree.dat"/>
+	    <param name="penetrance" value="pen.dat" />
+	    <param name="typeanalysis" value="Sampling"/>
+	    <output name="simwalk2output"/>
+	</test>
+    </tests>
+    <help><![CDATA[
+        Some random text so that linting would be complete.
+    ]]></help>
+    <citations>
+	<citation type="doi">10.1038/ng786</citation>
+    </citations>
+</tool>

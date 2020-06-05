@@ -1,0 +1,4 @@
+    1                            <= Number of Loci of type Affection Status
+    EA          1                    <= Trait Name, Number of Liability Classes
+      101    0.99900 0.01000 0.01000 <= Penetrances: Affection = 1 & Liability = 01
+        201    0.00100 0.99000 0.99000 <= Penetrances: Affection = 2 & Liability = 01
